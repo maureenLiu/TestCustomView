@@ -1,6 +1,7 @@
 package com.maureen.testcustomview;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -20,6 +21,9 @@ public class CircleView extends View {
 
     public CircleView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CircleView);
+        mColor = a.getColor(R.styleable.CircleView_circle_color, Color.RED);
+        a.recycle();
         init();
     }
 
