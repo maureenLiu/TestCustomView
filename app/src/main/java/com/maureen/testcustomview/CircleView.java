@@ -32,13 +32,28 @@ public class CircleView extends View {
         mPaint.setColor(mColor);
     }
 
-    @Override
+   /* @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         int width = getWidth();
         int height = getHeight();
         int radius = Math.min(width, height) / 2;
         canvas.drawCircle(width / 2, height / 2, radius, mPaint);
+    } */
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        //Custom View extends View directly,  padding property set in layout doesn't work.
+        //So need to consider the padding in onDraw().
+        final int paddingLeft = getPaddingLeft();
+        final int paddingRight = getPaddingRight();
+        final int paddingTop = getPaddingTop();
+        final int paddingButtom = getPaddingBottom();
+        int width = getWidth() - paddingLeft - paddingRight;
+        int height = getHeight() - paddingTop - paddingButtom;
+        int radius = Math.min(width, height) / 2;
+        canvas.drawCircle(paddingLeft + width/2, paddingTop + height/2, radius, mPaint);
     }
 
     @Override
@@ -57,4 +72,6 @@ public class CircleView extends View {
             setMeasuredDimension(widthSpecSize, 200);
         }
     }
+
+
 }
